@@ -1,0 +1,115 @@
+# include <iostream>
+# include <fstream>
+# include <string>
+# include <sstream>
+
+using namespace std;
+
+void search_file(ifstream& roster){
+
+string id_number;
+string user;
+char name[6];
+
+cout << "Enter your ID number \n";
+cin  >> user;
+
+while(!(roster.eof())){
+
+    for(int i = 0; getline(roster, id_number); i++){
+        if (id_number.find(user)  != string::npos){
+
+            if (user == "123"){
+
+            roster.seekg(4, ios::beg);
+
+            roster.read(name, 5);
+
+            name[5] = 0;
+
+            cout << name << endl;
+
+            }
+            else if (user == "234"){
+
+            roster.seekg(15, ios::beg);
+
+            roster.read(name, 5);
+
+            name[5] = 0;
+
+            cout << name << endl;
+
+            }
+
+            else if (user == "323"){
+
+            roster.seekg(25, ios::beg);
+
+            roster.read(name, 6);
+
+            name[6] = 0;
+
+            cout << name << endl;
+
+            }
+
+
+            else if (user == "444"){
+
+            roster.seekg(36, ios::beg);
+
+            roster.read(name, 5);
+
+            name[6] = 0;
+
+            cout << name << endl;
+
+            }
+
+            else if (user == "666"){
+            roster.seekg(57, ios::beg);
+
+            roster.read(name, 4);
+
+            name[5] = 0;
+
+            cout << name << endl;
+            }
+
+        }// end of if 2
+
+
+    }// end for loop
+
+}// end of while
+
+
+roster.close();
+roster.seekg(0, roster.beg);
+}
+
+int main(){
+
+ifstream roster;
+char ans = ' ';
+string filename ;
+
+
+roster.open("C:\\Users\\ELRA7\\Documents\\New folder\\Lab 8_FA19\\Lab 8_FA19\\roster.txt");
+
+if(!(roster)){ // error check
+    cout << "Error";
+    roster.close();
+}
+
+while(ans != 'n'){
+
+search_file(roster);
+
+cout << "Would You like to continue?\n";
+cin  >> ans;
+}
+
+return 0;
+}

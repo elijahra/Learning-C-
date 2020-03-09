@@ -1,0 +1,198 @@
+#include <iostream>
+#include <String>
+#include <iomanip>
+#include <cmath>
+#include <math.h>
+
+using namespace std;
+
+int year;
+int month;
+string y = " ";
+string Month = " ";
+int numofdays = 0;
+
+
+int main(){
+
+while(y != "n"){
+
+    int day = 1; // has to be re-initialized after every loop
+    cout << "Input a year\n";
+    cin  >> year; // Here the user input the year they want their calendar
+    cout << endl;
+    cout << "Chose a month Numerically\n";
+    int firstday =  (((year-1)*365) + ((year-1)/4) - ((year-1)/100) + ((year-1)/400)+1) % 7;
+    // this determines the first day of the year
+	
+    cout << "1  = January\n";
+    cout << "2  = February\n";
+    cout << "3  = March\n";
+    cout << "4  = April\n";
+    cout << "5  = May\n";
+    cout << "6  = June\n";
+    cout << "7  = July\n";
+    cout << "8  = August\n";
+    cout << "9  = September\n";
+    cout << "10 = October\n";
+    cout << "11 = November\n";
+    cout << "12 = December\n\n";
+
+    cout << "Chose a month Numerically\n";
+    cin  >> month;
+    cout << endl;
+
+switch(month){
+
+case 1:
+    Month = "January ";
+    numofdays = 31;
+    break;
+
+case 2:
+    Month = "February ";
+    firstday = (firstday +31)%7;
+    if (year % 4 == 0){
+        numofdays = 29;
+    }
+    else{
+        numofdays = 28;
+    }
+    break;
+
+case 3:
+    Month = "March ";
+    numofdays = 31;
+    if (year % 4 == 0){
+        firstday = (firstday +31+29)%7; // The first days are changed for every month and according to leap year
+    }
+    else{
+        firstday = (firstday +31+28)%7;
+    }
+    break;
+
+case 4:
+    Month = "April ";
+    numofdays = 30;
+    if (year % 4 == 0){
+        firstday = (firstday +31+29+31)%7;
+    }
+    else{
+        firstday = (firstday +31+28+31)%7;
+    }
+    break;
+case 5:
+    Month = "May ";
+    numofdays = 31;
+    if (year % 4 == 0){
+        firstday = (firstday +31+29+31+30)%7;
+    }
+    else{
+        firstday = (firstday +31+28+31+30)%7;
+    }
+    break;
+
+case 6:
+    Month = "June ";
+    numofdays = 30;
+     if (year % 4 == 0){
+        firstday = (firstday +31+29+31+30+31)%7;
+    }
+    else{
+        firstday = (firstday +31+28+31+30+31)%7;
+    }
+    break;
+
+case 7:
+    Month = "July ";
+    numofdays = 31;
+    if (year % 4 == 0){
+        firstday = (firstday +31+29+31+30+31+30)%7;
+    }
+    else{
+        firstday = (firstday +31+28+31+30+31+30)%7;
+    }
+    break;
+
+case 8:
+    Month = "August ";
+    numofdays = 31;
+    if (year % 4 == 0){
+        firstday = (firstday +31+29+31+30+31+30+31)%7;
+    }
+    else{
+        firstday = (firstday +31+28+31+30+31+30+31)%7;
+    }
+    break;
+
+case 9:
+    Month = "September ";
+    numofdays = 30;
+    if (year % 4 == 0){
+        firstday = (firstday +31+29+31+30+31+30+31+31)%7;
+    }
+    else{
+        firstday = (firstday +31+28+31+30+31+30+31+31)%7;
+    }
+    break;
+
+case 10:
+    Month = "October ";
+    numofdays = 31;
+    if (year % 4 == 0){
+        firstday = (firstday +31+29+31+30+31+30+31+31+30)%7;
+    }
+    else{
+        firstday = (firstday +31+28+31+30+31+30+31+31+30)%7;
+    }
+    break;
+
+case 11:
+    Month = "November ";
+    numofdays = 30;
+    if (year % 4 == 0){
+        firstday = (firstday +31+29+31+30+31+30+31+31+30+31)%7;
+    }
+    else{
+        firstday = (firstday +31+28+31+30+31+30+31+31+30+31)%7;
+    }
+    break;
+
+case 12:
+    Month = "December ";
+    numofdays = 31;
+    if (year % 4 == 0){
+        firstday = (firstday +31+29+31+30+31+30+31+31+30+31+30)%7;
+    }
+    else {
+        firstday = (firstday +31+28+31+30+31+30+31+31+30+31+30)%7;
+    }
+    break;
+
+default:
+    cout <<"Enter a number between 1 and 12. Try again\n\n";
+    continue;
+    break;
+    }// end of switch
+
+    cout <<setw(21)<<Month<<year<< endl;
+    cout <<"\nSun   Mon   Tue   Wed   Thu   Fri   Sat";
+	cout <<"\n\n"  <<setw(2);
+    for (int i = 0; i < 6; i ++){                               // This for loop establishes the # of rows
+
+        for (int j = 0; j < 7; j ++){                           // This for loop establishes the # of columns
+            if ((i == 0 && j < firstday) || day > numofdays){   // The days print out until there are it reaches the number of days in the month.
+            cout << " "<< setw(6);
+        }
+        else{
+         cout << day++ <<setw(6);
+         }
+        }
+    cout<<"\n";
+     }
+cout << endl;
+cout << "Would you like to continue? (y/n)\n";
+cin  >> y;
+}                                                               // end of while
+return 0;
+}                                                               // end of main

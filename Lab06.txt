@@ -1,0 +1,121 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+const double RATE = 25.0;
+const double SES_RATE = 10.0;
+const double SEN_DISC = .30;
+const double MON_DISC = .15;
+const double SES_DISC = .20;
+
+void info(){
+
+cout << "The Types of Memberships are: \n\n";
+
+cout << "Adult\n";
+
+cout << "Senior\n\n";
+
+cout << "30% percent discount if you are a Senior (Age 65 or older)\n";
+cout << "15% percent discount if you buy a 12 month membership\n";
+cout << "20% percent discount on each session if you purchase more than five personal training sessions.\n\n";
+
+}
+double calculateFee(double discount, int mont){
+
+double fee;
+
+fee = (RATE*(1-discount)) + (SES_RATE*(1- (SES_DISC*mont)));
+
+return (fee);
+}
+
+double get_info(){
+
+    int age;
+    int mont;
+    int num;
+    int train;
+    double fee;
+    double discount;
+    //double fee;
+    char ans = ' ';
+
+    cout << "Enter your age\n";
+    cin  >> age;
+    cout << "How many months do you want your membership?\n";
+    cin  >> mont;
+    cout << "How many personal training sessions do you want?\n";
+    cin  >> train;
+
+    if  ((age < 65) && (mont < 12) &&(train < 5)){
+        cout << "You chose the adult pricing.\n";
+        cout << "This plan offers you no discounts\n";
+        cout << "Your total discount is "<< 0 << "%";
+        discount = 0;
+
+    }
+
+    else if  ((age < 65)  && (mont < 12)&&(train >= 5)){
+        cout << "You chose the senior pricing.\n";
+        cout << "With the  five session discount \n";
+        cout << "Your total discount is " << SES_DISC*100 << "%";
+        discount = SES_DISC;
+
+    }
+
+    else if  ((age < 65)  && (mont >= 12)&&(train >= 5)){
+        cout << "You chose the adult pricing.\n";
+        cout << "With the 12 month discount and five session discount \n";
+        cout << "Your total discount is " << (MON_DISC + SES_DISC)*100 << "%";
+        discount = MON_DISC + SES_DISC;
+    }
+
+    else if  (( age < 65) && (mont >= 12)&&(train < 5)){
+        cout << "You chose the adult pricing.\n";
+        cout << "With the five session discount \n";
+        cout << "Your total discount is " << SES_DISC*100 << "%";
+        discount = SES_DISC;
+    }
+
+    else if ((age >= 65)&& (mont < 12) && (train < 5)){
+        cout << "You chose the senior pricing.\n";
+        cout << "With the a senior discount. \n";
+        cout << "Your total discount is " << SEN_DISC*100 << "%" ;
+        discount = SEN_DISC;
+    }
+    else if ((age >= 65)&& (mont < 12) && (train >= 5)){
+        cout << "You chose the senior pricing\n";
+        cout << "With the a senior discount, five session discount. \n";
+        cout << "Your total discount is " << (SEN_DISC + SES_DISC) *100 << "%";
+        discount = SEN_DISC + SES_DISC;
+    }
+
+    else if ((age >= 65)&& (mont >= 12) && (train >= 5)){
+        cout << "You chose the senior pricing.\n";
+        cout << "With the a senior discount, 12 month discount, and five session discount \n";
+        cout << "Your total discount is " << (SEN_DISC + MON_DISC + SES_DISC)*100 << "%";
+        discount = SEN_DISC + MON_DISC + SES_DISC;
+        num = 7;
+    }
+
+    else if  ((age >= 65)&& (mont >= 12) && (train < 5)){
+        cout << "You chose the senior pricing.\n";
+        cout << "With the a senior discount and 12 month discount \n";
+        cout << "Your total discount is " << (SEN_DISC + MON_DISC)*100 << "%";
+        discount = SEN_DISC + MON_DISC;
+    }
+    cout<< endl<< endl;
+    fee = calculateFee(discount, mont);
+    cout << "Your total fee is $"<< fee;
+    return (fee);
+}
+
+
+int main(){
+
+info();
+get_info();
+
+return 0;
+}

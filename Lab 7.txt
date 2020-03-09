@@ -1,0 +1,40 @@
+#include <iostream>
+#include <iomanip>
+#include <fstream>
+
+using namespace std;
+
+int main()
+
+{
+ifstream infile;
+
+int words=0;
+char letter;
+infile.open("C:\\Users\\ELRA7\\Documents\\New folder\\cs121_Lab7\\wake.txt");
+    if(!infile)
+		{
+			cout << " There was an error " << endl;
+
+		}
+    while(!infile.eof())
+			{
+                infile.get(letter);
+				if (letter == ' '){
+                    words++;
+				}
+			}
+cout << " The word count is  :" << words << endl;
+infile.close();
+
+ofstream outfile;
+outfile.open("C:\\Users\\ELRA7\\Documents\\New folder\\cs121_Lab7\\wakecount.txt",ios::out);
+outfile << "The word count is: "<<  words;
+outfile.close();
+
+return 0;
+
+}
+
+
+
